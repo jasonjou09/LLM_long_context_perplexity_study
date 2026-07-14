@@ -182,7 +182,7 @@ import llama_cpp
 
 ---
 
-## 💡 Shell Syntax Configuration Tips
+## Shell Syntax Configuration Tips
 
 When configuring environment variables in Windows, the syntax varies significantly based on the shell/terminal emulator you are using:
 
