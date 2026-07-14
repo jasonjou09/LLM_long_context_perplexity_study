@@ -3,7 +3,7 @@ This repo aims to evaluate a LLM's performance by evaluating its reduction in pe
 It provides an alternative way to view how well a model learns a long context document like novels, and gives measureble metrics to evaluate them.
 
 
-This readme provides a step-by-step guide to installing and configuring `llama-cpp-python` with hardware acceleration (Vulkan, CUDA, or Intel SYCL) on Windows. 
+This readme provides a step-by-step guide to installing and configuring `llama-cpp-python` with hardware acceleration (Vulkan, CUDA, or Intel SYCL) on Windows. You can also download the `Llama.cpp installation guide.docx` to see the installation guide with screenshots to assist you.
 
 ---
 
