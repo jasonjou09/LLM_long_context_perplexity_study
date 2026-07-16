@@ -7,7 +7,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 from llama_cpp import Llama
-from environment_variables import model_path_gpt, model_path_qwen
+from environment_variables import model_path_gpt, model_path_qwen, LlmParameter
 
 # ---------------------------------------------------------
 # UI 選擇 txt 檔案
@@ -32,10 +32,10 @@ sentences = [s.strip() for s in re.split(r'(?<=[\n])', full_document_text) if s.
 # ---------------------------------------------------------
 # 提前定義輸出檔案名稱 (為了斷點續傳)
 # ---------------------------------------------------------
-model_path = model_path_gpt # Or any path that leads to your AI model
+parameter = LlmParameter(model_type='GPT')
 [fp, fn] = os.path.split(file_path)
 fn = os.path.splitext(fn)[0]
-[mp, mn] = os.path.split(model_path)
+[mp, mn] = os.path.split(parameter.model_path)
 mn = os.path.splitext(mn)[0]
 
 output_filename = f"探測結果_v3.1_{fn}_{mn}.csv"
@@ -80,9 +80,9 @@ print("正在載入 GGUF 模型...")
 MAX_CONTEXT_WINDOW = 10240
 
 llm = Llama(
-    model_path=model_path,
-    n_gpu_layers=16,
-    n_threads=6,
+    model_path=parameter.model_path,
+    n_gpu_layers=parameter.n_gpu_layers,
+    n_threads=parameter.n_threads,
     n_ctx=MAX_CONTEXT_WINDOW,
     logits_all=True,
     verbose=False,

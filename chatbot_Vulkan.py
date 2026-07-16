@@ -3,21 +3,21 @@ import csv
 import time
 from datetime import datetime
 from llama_cpp import Llama
-from environment_variables import model_path_gpt, model_path_qwen
+from environment_variables import model_path_gpt, model_path_qwen, LlmParameter
 
 # ---------------------------------------------------------
 # 模型載入設定
 # ---------------------------------------------------------
-# 請換成你實際要測試的大模型路徑
-model_path = model_path_qwen
+# Pull parameter preset from environment_variables.py
+parameter = LlmParameter(model_type='Qwen')
 
 print("=" * 50)
 print("正在將模型載入 SYCL (Intel Arc) 後端...")
 # 注意：移除了 logits_all=True，因為一般對話不需要計算所有備胎詞的機率
 llm = Llama(
-    model_path=model_path,
-    n_gpu_layers=16,
-    n_threads=6,
+    model_path=parameter.model_path,
+    n_gpu_layers=parameter.n_gpu_layers,
+    n_threads=parameter.n_threads,
     n_ctx=8192,
     verbose=False,  # 關閉底層 C++ 日誌以保持終端機乾淨
     flash_attn=True,
