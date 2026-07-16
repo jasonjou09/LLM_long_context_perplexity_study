@@ -30,9 +30,10 @@ with open(file_path, 'r', encoding='utf-8') as f:
 sentences = [s.strip() for s in re.split(r'(?<=[\n])', full_document_text) if s.strip()]
 
 # ---------------------------------------------------------
-# 提前定義輸出檔案名稱 (為了斷點續傳)
+# 預先引入模型preset和提前定義輸出檔案名稱 (為了斷點續傳)
 # ---------------------------------------------------------
-parameter = LlmParameter(model_type='GPT')
+MAX_CONTEXT_WINDOW = 10240
+parameter = LlmParameter(model_type='GPT', n_ctx=MAX_CONTEXT_WINDOW)
 [fp, fn] = os.path.split(file_path)
 fn = os.path.splitext(fn)[0]
 [mp, mn] = os.path.split(parameter.model_path)
@@ -83,7 +84,7 @@ llm = Llama(
     model_path=parameter.model_path,
     n_gpu_layers=parameter.n_gpu_layers,
     n_threads=parameter.n_threads,
-    n_ctx=MAX_CONTEXT_WINDOW,
+    n_ctx=parameter.n_ctx,
     logits_all=True,
     verbose=False,
     n_batch=512,
@@ -193,7 +194,7 @@ if completed_csv_rows < len(sentences):  # 如果 CSV 沒寫完，代表我們�
 
         print(f"  ⚡ 脈絡預測 ({i + 1}/{len(sentences)}) | 機率: {avg_prob:.4f}")
         if (i + 1) % 5 == 0 or (i + 1) == len(sentences):
-            report_hardware_status(model_path, accumulated_tokens)
+            report_hardware_status(parameter.model_path, accumulated_tokens)
 
     pass1_file.close()
 
