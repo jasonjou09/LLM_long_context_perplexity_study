@@ -9,7 +9,7 @@ model_path_gpt = r"E:\LM Studio\models\lmstudio-community\gpt-oss-20b-GGUF\gpt-o
 model_path_qwen = r"E:\LM Studio\models\mradermacher\Qwen3-4B-Base-GGUF\Qwen3-4B-Base.Q4_K_S.gguf"
 
 class LlmParameter:
-    def __init__(self, model_type, model_path, n_gpu_layers, n_threads):
+    def __init__(self, model_type, model_path = model_path_qwen, n_gpu_layers = 36, n_threads = 6):
         """model_type: string ('GPT' or 'Qwen')"""
 
         self.model_type = model_type
@@ -25,6 +25,3 @@ class LlmParameter:
             self.n_threads = 6
         else:
             print("model type not specified, defaulting to Qwen")
-            self.model_path = model_path_qwen
-            self.n_gpu_layers = 36
-            self.n_threads = 6
