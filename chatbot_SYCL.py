@@ -2,7 +2,7 @@ import os
 import csv
 import time
 from datetime import datetime
-from environment_variables import intel_compiler_bin, intel_mkl_bin, model_path_gpt, model_path_qwen, LlmParameter
+from environment_variables import intel_compiler_bin, intel_mkl_bin, LlmParameter
 
 # 針對 Intel Arc GPU (SYCL) 的環境變數注入
 if os.name == 'nt':
@@ -12,11 +12,11 @@ if os.name == 'nt':
             os.environ["PATH"] = path + ";" + os.environ.get("PATH", "")
 from llama_cpp import Llama
 
-# ---------------------------------------------------------
+# ---------------------------------------------------------英文
 # 模型載入設定
 # ---------------------------------------------------------
 # Pull parameter preset from environment_variables.py
-parameter = LlmParameter(model_type='GPT')
+parameter = LlmParameter(model_type='Qwen3.5', n_ctx=32768)
 
 print("=" * 50)
 print("正在將模型載入 SYCL (Intel Arc) 後端...")

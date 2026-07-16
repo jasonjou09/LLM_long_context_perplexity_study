@@ -7,7 +7,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 from llama_cpp import Llama
-from environment_variables import model_path_gpt, model_path_qwen, LlmParameter
+from environment_variables import LlmParameter
 
 # ---------------------------------------------------------
 # UI 選擇 txt 檔案

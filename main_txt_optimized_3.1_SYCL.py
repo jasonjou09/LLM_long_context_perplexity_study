@@ -6,7 +6,7 @@ import psutil
 import numpy as np
 import tkinter as tk
 from tkinter import filedialog
-from environment_variables import intel_compiler_bin, intel_mkl_bin, model_path_gpt, model_path_qwen, LlmParameter
+from environment_variables import intel_compiler_bin, intel_mkl_bin, LlmParameter
 
 # For oneAPI-based Intel GPU only!
 if os.name == 'nt':

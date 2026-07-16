@@ -3,13 +3,13 @@ import csv
 import time
 from datetime import datetime
 from llama_cpp import Llama
-from environment_variables import model_path_gpt, model_path_qwen, LlmParameter
+from environment_variables import LlmParameter
 
 # ---------------------------------------------------------
 # 模型載入設定
 # ---------------------------------------------------------
 # Pull parameter preset from environment_variables.py
-parameter = LlmParameter(model_type='Qwen')
+parameter = LlmParameter(model_type='Qwen3.5', n_ctx=32768)
 
 print("=" * 50)
 print("正在將模型載入 SYCL (Intel Arc) 後端...")
