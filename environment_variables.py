@@ -9,10 +9,11 @@ model_path_gpt = r"E:\LM Studio\models\lmstudio-community\gpt-oss-20b-GGUF\gpt-o
 model_path_qwen3_bs = r"E:\LM Studio\models\mradermacher\Qwen3-4B-Base-GGUF\Qwen3-4B-Base.Q4_K_S.gguf"
 model_path_qwen3_5_bs = r"E:\LM Studio\models\titan0115\Qwen3.5-4B-Base\Qwen3.5-4B-Base-Q4_K_S.gguf"
 model_path_qwen3_5 = r"E:\LM Studio\models\HauhauCS\Qwen3.5-4B-Uncensored-HauhauCS-Aggressive\Qwen3.5-4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf"
+model_path_qwen3_6moe = r"E:\LM Studio\models\HauhauCS\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive\Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ2_M.gguf"
 
 class LlmParameter:
     def __init__(self, model_type, model_path = "", n_gpu_layers = 0, n_threads = 0, n_ctx = 0):
-        """model_type: string ('GPT', 'Qwen3Base', 'Qwen3.5Base', 'Qwen3.5' or anything other string, you must specify it)"""
+        """model_type: string ('GPT', 'Qwen3Base', 'Qwen3.5Base', 'Qwen3.5', 'Qwen3.6MOE' or anything other string, you must specify it)"""
 
         self.model_type = model_type
 
@@ -39,6 +40,12 @@ class LlmParameter:
             self.n_gpu_layers = 36 if n_gpu_layers == 0 else n_gpu_layers
             self.n_threads = 6 if n_threads == 0 else n_threads
             self.n_ctx = 16384 if n_ctx == 0 else n_ctx
+
+        elif self.model_type == 'Qwen3.6MOE':
+            self.model_path = model_path_qwen3_6moe
+            self.n_gpu_layers = 22 if n_gpu_layers == 0 else n_gpu_layers
+            self.n_threads = 6 if n_threads == 0 else n_threads
+            self.n_ctx = 8192 if n_ctx == 0 else n_ctx
 
         elif model_path == "" or n_gpu_layers == 0 or n_threads == 0:
             print("model type unrecognized while detailed parameter unspecified, defaulting to Qwen3.5 Instruct")
